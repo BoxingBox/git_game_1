@@ -5,14 +5,33 @@
         <META charset="UTF-8">
     </HEAD>
     <BODY>
+      <h1>Paper rock scissors!</h1>
+      <button id="btn1">Rock</button>
+      <button id="btn2">Paper</button>
+      <button id="btn3">Scissors</button>
+
+      <div id="container"></div>
+      <div id="resultsContainer"></div>
+
+
+
+    </BODY>
         
         <SCRIPT>
+
+        let pcselection 
         let newpctotal;
-        var counter=0;
+        var counter=1;
         let result;
         let finalresult;
-        let playerselection=prompt("Rock paper or scissors?")
-        let pcselection=Math.random()*10;
+        let i=0;
+        let winCounter=0, loseCounter=0, drawCounter=0;
+
+
+        // let playerselection=prompt("Rock paper or scissors?")
+        
+       
+
         function getcomputerchoice(pcselection)
         {if (pcselection>0 && pcselection<=3.33)
         {pcselection="scissors";
@@ -25,56 +44,230 @@
         }
 
 
+        const btn1=document.querySelector('#btn1');
+        const btn2=document.querySelector('#btn2');
+        const btn3=document.querySelector('#btn3');
 
-        pcselection=String(pcselection);
+        const wincondition1=document.createElement('div');
+        const wincondition2=document.createElement('div');
+        const wincondition3=document.createElement('div');
 
-        console.log("PC selected: ", getcomputerchoice(pcselection))
-        console.log("User selected: ", playerselection)
+        const displayResults=document.createElement('div');
 
-        function playround(playerselection, pcselection)
-        { 
-          if(playerselection=="rock" && pcselection=="paper"){return result="PC wins!"}
-          else if(playerselection=="scissors" && pcselection=="rock"){return result="PC wins!"}
-          else if(playerselection=="paper" && pcselection=="scissors"){return result="PC wins!"}
+        let content=document.querySelector('#container');
+        let resultContent=document.querySelector('#resultsContainer');
 
-          else if(playerselection=="paper" && pcselection=="rock"){return result="User wins!"}
-          else if(playerselection=="rock" && pcselection=="scissors"){return result="User wins!"}
-          else if(playerselection=="scissors" && pcselection=="paper"){return result="User wins!"}
 
-          else{return result="DRAW"}
-        }
 
-        console.log(playround(playerselection, getcomputerchoice(pcselection)));
-        pctotal=getcomputerchoice(pcselection);
-        let newplayerselection;
-        let pccounter=0,usercounter=0,drawcounter=0;
+        btn1.addEventListener('click', () => {    //ROCK LISTENER
 
-        function game()
-        
-        { console.log(newplayerselection); console.log(newpctotal)
-        
-          for(let i=0; i<=4; i++){
-              let newpcselection=Math.random()*10;
-              newpctotal=getcomputerchoice(newpcselection);
-              newplayerselection=prompt("Enter rock, paper or scissors!");
-              if (playround(newplayerselection, newpctotal)=="PC wins!"){  console.log("pc wins"); pccounter=pccounter+1;}
-              else if(playround(newplayerselection, newpctotal)=="DRAW"){  console.log("draw");drawcounter=drawcounter+1;}
-              else if(playround(newplayerselection, newpctotal)=="User wins!"){ console.log("User wins"); usercounter=usercounter+1;}
-            }
+            if(winCounter+drawCounter+loseCounter<=4){
+            let pcselection=Math.random()*10;  
+            let playerselection="Rock";
             
-            console.log("pc won", pccounter);
-            console.log("user won", usercounter);
-            console.log("draw times:", drawcounter);
 
-            if (usercounter>pccounter){console.log("User has won with ", usercounter, "wins out of 5 games with", drawcounter, " draws!")}
-            else if(pccounter>usercounter){console.log("PC has won with ", pccounter, "wins out of 5 games with", drawcounter, " draws!")}
-            else console.log("The game is a draw with ", drawcounter, " draws");
 
-            return counter;
+            if(playerselection=="Rock" && getcomputerchoice(pcselection)=="paper"){
+
+              
+              wincondition1.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`;
+              content.appendChild(wincondition1);
+              content.currentTime=0;
+              loseCounter=loseCounter+1;
+              displayResults.textContent=`${loseCounter} losses`;
+              resultContent .appendChild(displayResults);
+              
+              
+              }
+
+            if(playerselection=="Rock" && getcomputerchoice(pcselection)=="rock"){
+
+               
+               wincondition2.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+               content.appendChild(wincondition2);
+               content.currentTime=0;
+               drawCounter=drawCounter+1;
+               console.log(`${drawCounter} draws`);
+               
+          
+          }
+            if(playerselection=="Rock" && getcomputerchoice(pcselection)=="scissors"){
+          
+              
+              wincondition3.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, User wins!`
+              content.appendChild(wincondition3);
+              content.currentTime=0;
+              winCounter=winCounter+1;
+              console.log(`${winCounter} wins`);
+              
+          }
+          
+        }})
+
+        btn2.addEventListener('click', () =>    //PAPER LISTENER
+        {   
+
+          if(winCounter+drawCounter+loseCounter<=4){
+
+           let pcselection=Math.random()*10;  
+           let playerselection="Paper";
+
+           if(playerselection=="Paper" && getcomputerchoice(pcselection)=="scissors"){
+            
+            wincondition1.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`
+            content.append(wincondition1);
+            content.currentTime=0;
+            loseCounter=loseCounter+1;
+            console.log(`${loseCounter} losses`);
+            if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);
+            }
+            }
+
+           if(playerselection=="Paper" && getcomputerchoice(pcselection)=="paper"){
+
+            wincondition2.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+            content.appendChild(wincondition2);
+            content.currentTime=0;
+            drawCounter=drawCounter+1;
+            console.log(`${drawCounter} draws`);
+            if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);
+            }
+            if(winCounter+drawCounter+loseCounter==5){console.log("end")}
+            }
+
+           if(playerselection=="Paper" && getcomputerchoice(pcselection)=="rock"){
+
+             wincondition3.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, User wins!`
+             content.appendChild(wincondition3);
+             content.currentTime=0;
+             winCounter=winCounter+1;
+             console.log(`${winCounter} wins`);
+             if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);
+            }
+             if(winCounter+drawCounter+loseCounter==5){console.log("end")
+             if(winCounter>loseCounter){console.log("User won")
+             if(loseCounter>winCounter){onsole.log("AI won")}
+             if(loseCounter==winCounter){onsole.log("DRAW!")}
+             
+            
+            }}
+            }
+          }})
+
+
+         btn3.addEventListener('click', () => {      //SCISSORS LISTENER
+
+
+          if(winCounter+drawCounter+loseCounter<=4){
+
+         let pcselection=Math.random()*10;  
+         let playerselection="Scissors";
+
+         
+         if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="rock"){
+
+          wincondition1.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`
+          content.appendChild(wincondition1)
+          content.currentTime=0;
+          loseCounter=loseCounter+1;
+          console.log(`${loseCounter} losses`);
+
+
+        }
+         if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="scissors"){
+
+            wincondition2.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+            content.appendChild(wincondition2);
+            content.currentTime=0;
+            drawCounter=drawCounter+1;
+            console.log(`${drawCounter} draws`);
+            
+          }
+         if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="paper"){
+
+            wincondition3.textContent=(`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, User wins!`)
+            content.appendChild(wincondition3);
+            content.currentTime=0;
+            winCounter=winCounter+1;
+            console.log(`${winCounter} wins`);
+            
+          }
+        }})
+
+
+
+
+
         
-    }
 
-        console.log(game()); 
+         
+
+
+
+
+        //pcselection=String(pcselection);
+
+        //console.log("PC selected: ", getcomputerchoice(pcselection))
+        //console.log("User selected: ", playerselection)
+
+        //function playround(playerselection, pcselection)
+       // { 
+         // if(playerselection=="rock" && pcselection=="paper"){return result="PC wins!"}
+         // else if(playerselection=="scissors" && pcselection=="rock"){return result="PC wins!"}
+        //  else if(playerselection=="paper" && pcselection=="scissors"){return result="PC wins!"}
+
+       //   else if(playerselection=="paper" && pcselection=="rock"){return result="User wins!"}
+        //  else if(playerselection=="rock" && pcselection=="scissors"){return result="User wins!"}
+        //  else if(playerselection=="scissors" && pcselection=="paper"){return result="User wins!"}
+
+         // else{return result="DRAW"}
+      //  }
+
+
+        //pctotal=getcomputerchoice(pcselection);
+        //let newplayerselection;
+        //let pccounter=0,usercounter=0,drawcounter=0;
+
+        //function game()
+        
+      //  { 
+        
+          //  for(let i=0; i<=4; i++){
+             // let newpcselection=Math.random()*10;
+             // newpctotal=getcomputerchoice(newpcselection);
+             // newplayerselection=prompt("Enter rock, paper or scissors!");
+             // if (playround(newplayerselection, newpctotal)=="PC wins!"){  console.log("pc wins"); pccounter=pccounter+1;}
+            //  else if(playround(newplayerselection, newpctotal)=="DRAW"){  console.log("draw");drawcounter=drawcounter+1;}
+           //   else if(playround(newplayerselection, newpctotal)=="User wins!"){ console.log("User wins"); usercounter=usercounter+1;}
+           // }
+            
+           // console.log("pc won", pccounter);
+           // console.log("user won", usercounter);
+           // console.log("draw times:", drawcounter);
+
+          //  if (usercounter>pccounter){console.log("User has won with ", usercounter, "wins out of 5 games with", drawcounter, " draws!")}
+           // else if(pccounter>usercounter){console.log("PC has won with ", pccounter, "wins out of 5 games with", drawcounter, " draws!")}
+          //  else console.log("The game is a draw with ", drawcounter, " draws");
+
+          //    return counter;
+        
+  //  }
+
+
+
+      //  console.log(game()); 
 
 
         
@@ -100,5 +293,5 @@
 
             
         </SCRIPT>
-    </BODY>
+
 </HTML>
