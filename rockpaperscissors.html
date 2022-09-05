@@ -70,12 +70,15 @@
             if(playerselection=="Rock" && getcomputerchoice(pcselection)=="paper"){
 
               
-              wincondition1.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`;
+              wincondition1.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, AI wins! Losses:${loseCounter+1}`
               content.appendChild(wincondition1);
               content.currentTime=0;
               loseCounter=loseCounter+1;
-              displayResults.textContent=`${loseCounter} losses`;
-              resultContent .appendChild(displayResults);
+              if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
               
               
               }
@@ -83,22 +86,30 @@
             if(playerselection=="Rock" && getcomputerchoice(pcselection)=="rock"){
 
                
-               wincondition2.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+               wincondition2.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, its a Draw! draws:${drawCounter+1}`
                content.appendChild(wincondition2);
                content.currentTime=0;
                drawCounter=drawCounter+1;
-               console.log(`${drawCounter} draws`);
+               if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
                
           
           }
             if(playerselection=="Rock" && getcomputerchoice(pcselection)=="scissors"){
           
               
-              wincondition3.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, User wins!`
+              wincondition3.textContent=`User has selected rock and AI has selected ${getcomputerchoice(pcselection)}, User wins! Wins:${winCounter+1}`
               content.appendChild(wincondition3);
               content.currentTime=0;
               winCounter=winCounter+1;
-              console.log(`${winCounter} wins`);
+              if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
               
           }
           
@@ -114,7 +125,7 @@
 
            if(playerselection=="Paper" && getcomputerchoice(pcselection)=="scissors"){
             
-            wincondition1.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`
+            wincondition1.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, AI wins! Losses:${loseCounter+1}`
             content.append(wincondition1);
             content.currentTime=0;
             loseCounter=loseCounter+1;
@@ -129,7 +140,7 @@
 
            if(playerselection=="Paper" && getcomputerchoice(pcselection)=="paper"){
 
-            wincondition2.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+            wincondition2.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, its a Draw! draws:${drawCounter+1}`
             content.appendChild(wincondition2);
             content.currentTime=0;
             drawCounter=drawCounter+1;
@@ -140,12 +151,12 @@
               if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
               resultContent.appendChild(displayResults);
             }
-            if(winCounter+drawCounter+loseCounter==5){console.log("end")}
+            
             }
 
            if(playerselection=="Paper" && getcomputerchoice(pcselection)=="rock"){
 
-             wincondition3.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, User wins!`
+             wincondition3.textContent=`User has selected paper and AI has selected ${getcomputerchoice(pcselection)}, User wins! Wins:${winCounter+1}`
              content.appendChild(wincondition3);
              content.currentTime=0;
              winCounter=winCounter+1;
@@ -178,30 +189,42 @@
          
          if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="rock"){
 
-          wincondition1.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, AI wins!`
+          wincondition1.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, AI wins! Losses:${loseCounter+1} `
           content.appendChild(wincondition1)
           content.currentTime=0;
           loseCounter=loseCounter+1;
-          console.log(`${loseCounter} losses`);
+          if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws. `} 
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws` }
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
 
 
         }
          if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="scissors"){
 
-            wincondition2.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!`
+            wincondition2.textContent=`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, its a Draw!  draws:${drawCounter+1}`
             content.appendChild(wincondition2);
             content.currentTime=0;
             drawCounter=drawCounter+1;
-            console.log(`${drawCounter} draws`);
+            if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
             
           }
          if(playerselection=="Scissors" && getcomputerchoice(pcselection)=="paper"){
 
-            wincondition3.textContent=(`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, User wins!`)
+            wincondition3.textContent=(`User has selected Scissors and AI has selected ${getcomputerchoice(pcselection)}, User wins! Wins:${winCounter+1}`)
             content.appendChild(wincondition3);
             content.currentTime=0;
             winCounter=winCounter+1;
-            console.log(`${winCounter} wins`);
+            if(winCounter+drawCounter+loseCounter==5){
+              if(winCounter>loseCounter){displayResults.textContent=`User has won with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter<loseCounter){displayResults.textContent=`User has lost with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              if(winCounter==loseCounter){displayResults.textContent=`User has achieved a draw with ${winCounter} wins ${loseCounter} losses and ${drawCounter} draws`}
+              resultContent.appendChild(displayResults);}
             
           }
         }})
